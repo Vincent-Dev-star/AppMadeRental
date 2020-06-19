@@ -14,8 +14,8 @@ abstract class CarsDAO
     @Query("SELECT * FROM cars")
     public abstract List<CarsDTO> getListeCars();
 
-    @Query("SELECT COUNT(*) FROM cars WHERE name = :name")
-    public abstract  long countCarsParName(String name);
+    @Query("SELECT COUNT(*) FROM cars WHERE nom = :nom")
+    public abstract  long countCarsParName(String nom);
 
     @Insert
     public abstract void insert(CarsDTO... cars);

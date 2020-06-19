@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "142be4293532e77b73a6d5ca7f50d9e0",
+    "identityHash": "c803a0b82cc40ddc736c49c72c306967",
     "entities": [
       {
         "tableName": "cars",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `image` TEXT, `prixjournalier` INTEGER NOT NULL, `promotion` INTEGER NOT NULL, `agemin` INTEGER NOT NULL, `categorieco2` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT, `image` TEXT, `disponible` INTEGER NOT NULL, `prixjournalierbase` INTEGER NOT NULL, `promotion` INTEGER NOT NULL, `agemin` INTEGER NOT NULL, `categorieco2` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -15,8 +15,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "name",
-            "columnName": "name",
+            "fieldPath": "nom",
+            "columnName": "nom",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -27,8 +27,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "prixjournalier",
-            "columnName": "prixjournalier",
+            "fieldPath": "disponible",
+            "columnName": "disponible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prixjournalierbase",
+            "columnName": "prixjournalierbase",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -64,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '142be4293532e77b73a6d5ca7f50d9e0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c803a0b82cc40ddc736c49c72c306967')"
     ]
   }
 }

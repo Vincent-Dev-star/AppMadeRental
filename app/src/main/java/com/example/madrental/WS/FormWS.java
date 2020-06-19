@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public class FormWS {
     public String name;
+    public String image;
 }

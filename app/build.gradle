@@ -33,6 +33,12 @@ android {
 
 dependencies {
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation 'com.squareup.okhttp:okhttp:2.2.0'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+
     //WS
     implementation 'com.google.code.gson:gson:2.8.5'
 
@@ -41,6 +47,7 @@ dependencies {
 
     //BDD
     implementation 'androidx.room:room-runtime:2.2.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
     //ReclyclerView

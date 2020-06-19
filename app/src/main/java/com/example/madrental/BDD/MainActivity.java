@@ -4,15 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
+import com.example.madrental.DetailFrameActivity;
+import com.example.madrental.DetailFrameFragment;
 import com.example.madrental.adapter.CarsAdapter;
 import com.example.madrental.R;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.squareup.picasso.Picasso;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +31,9 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LIEN = "http://s519716619.onlinehome.fr/exchange/madrental/get-vehicules.php";
+    private static final String URLIMAGE = "https://i.imgur.com/DvpvklR.png";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
 
 
         //Acces à la base de données
@@ -53,13 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 CarsDTO[] retourWS = gson.fromJson(retour,CarsDTO[].class);
 
-
-                        //get values with DAO
-                        final List<CarsDTO> listesCars = new ArrayList<>();
-                        listesCars.add(new CarsDTO(1, "chien","test",1,2,3,'c'));
-                        listesCars.add(new CarsDTO(1, "chat","test",1,2,3,'c'));
-
-
                 List<CarsDTO> mcList = Arrays.asList(retourWS);
 
                 Log.d("anim", String.valueOf(mcList));
@@ -67,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 CarsAdapter carsAdapter = new CarsAdapter(mcList);
 
                 recyclerView.setAdapter(carsAdapter);
+
+
             }
 
             @Override
@@ -78,4 +84,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 }
