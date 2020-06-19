@@ -17,11 +17,10 @@ import android.widget.TextView;
 public class DetailFrameFragment extends Fragment {
 
     //Constante:
-    public static final String EXTRA_NAME = "CECI est un TEST";
+    public static final String EXTRA_NAME = "CECITEST";
+    static final String EXTRA_PRIX = "CECITEST";
+    private static final String EXTRA_ECO = "CECITEST";
 
-    public DetailFrameFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -31,12 +30,21 @@ public class DetailFrameFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        //init :
         super.onActivityCreated(savedInstanceState);
-        if(getView() != null && getContext() != null && getArguments() != null){
-            //Info du fragment !!!
-            TextView textView = getView().findViewById(R.id.detail_frame);
-            textView.setText(getArguments().getString(EXTRA_NAME));
+        if(getView() != null && getContext() != null && getArguments() != null)
+        {
+            //vues :
+            TextView textViewNom = getView().findViewById(R.id.detail_frame_nom);
+            textViewNom.setText(getArguments().getString(EXTRA_NAME));
+
+            TextView textViewPrix = getView().findViewById(R.id.detail_frame_prix);
+            textViewPrix.setText(getArguments().getString(EXTRA_PRIX));
+
+            TextView textViewEco = getView().findViewById(R.id.detail_frame_eco);
+            textViewEco.setText(getArguments().getString(EXTRA_ECO));
         }
     }
 }

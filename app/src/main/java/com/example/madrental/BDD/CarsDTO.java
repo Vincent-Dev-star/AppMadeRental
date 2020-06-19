@@ -3,9 +3,6 @@ package com.example.madrental.BDD;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Entity(tableName = "cars")
 public class CarsDTO
 {

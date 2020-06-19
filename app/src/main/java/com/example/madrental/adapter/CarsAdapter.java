@@ -1,11 +1,5 @@
 package com.example.madrental.adapter;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,39 +7,29 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madrental.BDD.CarsDTO;
 import com.example.madrental.BDD.MainActivity;
-import com.example.madrental.DetailFrameActivity;
-import com.example.madrental.DetailFrameFragment;
 import com.example.madrental.R;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-import static androidx.core.content.ContextCompat.createDeviceProtectedStorageContext;
-import static androidx.core.content.ContextCompat.startActivity;
-
 public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder> {
 
+    //Liste d'object métier:
     private List<CarsDTO> listeCars;
 
-    private AsyncHttpResponseHandler mainActivity = null;
+    //Activité :
+    private MainActivity mainActivity = null;
 
-    //Smatphone ou pas
-    private FrameLayout frameLayoutConteneurDetail = null;
-
-
-    public CarsAdapter(List<CarsDTO> listeCars) {
+    public CarsAdapter(MainActivity mainActivity, List<CarsDTO> listeCars) {
         this.listeCars = listeCars;
+        this.mainActivity = mainActivity;
     }
+
 
     @NonNull
     @Override
@@ -66,7 +50,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
         holder.textViewLibelleCarsCategorieco2.setText("Categorieco2 : " + listeCars.get(position).categorieco2);
 
         Picasso.with(holder.imageViewLibelleCars.getContext()).load("http://s519716619.onlinehome.fr/exchange/madrental/images/"+listeCars.get(position).image).into(holder.imageViewLibelleCars);
-
     }
 
     @Override
@@ -74,17 +57,23 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
         return listeCars.size();
     }
 
-    public class CarsViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textViewLibelleCars;
-        public TextView textViewLibelleCarsPrix;
-        public TextView textViewLibelleCarsCategorieco2;
+    public CarsDTO getItemParPosition(int position)
+    {
+        return listeCars.get(position);
+    }
 
-        public ImageView imageViewLibelleCars;
+    class CarsViewHolder extends RecyclerView.ViewHolder {
 
-        public FrameLayout frameLayout;
+        TextView textViewLibelleCars;
+        TextView textViewLibelleCarsPrix;
+        TextView textViewLibelleCarsCategorieco2;
 
-        public CarsViewHolder(@NonNull final View itemView) {
+        ImageView imageViewLibelleCars;
+
+        FrameLayout frameLayout;
+
+        CarsViewHolder(@NonNull final View itemView) {
             super(itemView);
             textViewLibelleCars = itemView.findViewById(R.id.libelle_cars);
             textViewLibelleCarsPrix = itemView.findViewById(R.id.libelle_cars_prix);
@@ -94,33 +83,13 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
 
             frameLayout = itemView.findViewById(R.id.frame_layout);
 
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            // listener :
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View view)
                 {
-
-
-                    if(frameLayoutConteneurDetail != null){
-                        //fragment:
-
-                        DetailFrameFragment frameFragment = new DetailFrameFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString(DetailFrameFragment.EXTRA_NAME, "COUCUO");
-                        frameFragment.setArguments(bundle);
-
-                        // le conteneur de la partie détail est disponible, on est donc en mode "tablette"
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.conteneur_detail, frameFragment).commit();
-                    }
-                    else
-                    {
-                        // le conteneur de la partie détail n'est pas disponible, on est donc en mode "smartphone"
-                        Context context = view.getContext();
-                        Intent intent = new Intent(view.getContext(), DetailFrameActivity.class);
-                        intent.putExtra(DetailFrameFragment.EXTRA_NAME, "Heu");
-                        context.startActivity(intent);
-
-                    }
+                    mainActivity.onClicItem(getAdapterPosition(), listeCars);
                 }
             });
 

@@ -8,9 +8,23 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/detail_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/detail_frame_nom"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textSize="20sp"
+        android:text="@string/hello_blank_fragment" />
+
+    <TextView
+        android:id="@+id/detail_frame_prix"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/hello_blank_fragment"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/detail_frame_eco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="@string/hello_blank_fragment" />
 
